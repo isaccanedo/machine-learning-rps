@@ -1,0 +1,6 @@
+.env.local
+.cache
+node_modules
+app
+.DS_Store
+hidden

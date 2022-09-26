@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <title>Rock Paper Scissors Lizard Spock</title>
+
+    <script src="src/index.ts"></script>
+
+    <style>
+      body {
+        background-color: #586e75;
+        color: #fdf6e3;
+        font-family: Helvetica, sans-serif;
+        font-size: 1.3em;
+        position: relative;
+        text-align: center;
+      }
+
+      a {
+        color: #d5d5ee;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      body.touching {
+        background-color: #cb4b16;
+        color: white;
+      }
+
+      #header {
+        padding-top: 20px;
+      }
+
+      #webcam {
+        height: 480px;
+        width: 640px;
+      }
+
+      #options {
+        margin-bottom: 40px;
+      }
+
+      #options strong {
+        margin-bottom: 0.8em;
+      }
+
+      #debug-panel {
+        position: absolute;
+        left: 30%;
+        top: 200px;
+        text-align: left;
+      }
+
+      #debug-panel.hidden {
+        display: none;
+      }
+
+      #debug-panel h2,
+      #options h2 {
+        text-align: center;
+      }
+
+      #debug-panel span,
+      #options span {
+        font-weight: bold;
+      }
+
+      #start {
+        font-size: 1.5em;
+        width: 200px;
+        height: 60px;
+      }
+
+      #safari-warning,
+      #safari-ios-warning {
+        background-color: #cb4b16;
+        text-align: center;
+        margin: auto;
+        margin-bottom: 40px;
+        margin-top: 40px;
+
+        max-width: 1800px;
+      }
+
+      input {
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+
+      input,
+      label {
+        line-height: 1.5em;
+      }
+
+      #wrapper {
+        margin: auto;
+        max-width: 1200px;
+      }
+
+      #webcam,
+      #options {
+        display: inline-block;
+        max-width: 42%;
+      }
+
+      #webcam {
+        transform: rotateY(180deg);
+        -webkit-transform: rotateY(180deg); /* Safari and Chrome */
+        -moz-transform: rotateY(180deg); /* Firefox */
+      }
+
+      #options {
+        margin-left: 100px;
+      }
+
+      h1 {
+        clear: both;
+      }
+
+      #spoken-text {
+        background-color: darkred;
+      }
+
+      @media only screen and (max-width: 800px) {
+        #webcam,
+        #options {
+          float: none;
+          display: block;
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="header">Rock Paper Scissors Lizard Spock</h1>
+
+    <div id="debug-panel" class="hidden">
+      <h2>Debug</h2>
+      <div>Nothing: <span id="chance-nothing">0%</span></div>
+      <div>Rock: <span id="chance-rock">0%</span></div>
+      <div>Paper: <span id="chance-paper">0%</span></div>
+      <div>Scissors: <span id="chance-scissors">0%</span></div>
+      <div>Lizard: <span id="chance-lizard">0%</span></div>
+      <div>Spock: <span id="chance-spock">0%</span></div>
+    </div>
+
+    <div id="instructions">
+      <p id="safari-warning" hidden="true">
+        It looks like you're using Safari! If you're not hearing any audio,
+        select the "Safari" menu, then "Settings for This Website". Set the
+        "Auto-Play" dropdown to "Allow All Auto-Play"
+        <a href="#" id="close-safari" role="button">[x]</a>
+      </p>
+
+      <p id="safari-ios-warning" hidden="true">
+        It looks like you're using Safari! We're sorry, but your audio may not
+        work."
+        <a href="#" id="close-ios-safari" role="button">[x]</a>
+      </p>
+
+      <button id="start">Start</button>
+    </div>
+
+    <div id="wrapper">
+      <video id="webcam"></video>
+
+      <div id="options">
+        <div style="margin: 10px 0 10px 0;">
+          Make a symbol with your hand and we'll speak it to you!
+        </div>
+        <img
+          src="instructions.png"
+          id="instructions-img"
+          alt="examples of how to throw rock, paper, scissors, lizard, or spock"
+        />
+      </div>
+    </div>
+    <div style="clear: both;">
+      <h1 id="spoken-text"></h1>
+      Built with the
+      <a
+        href="https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/getting-started-build-a-classifier?WT.mc_id=sample-neuralspeech-emwalker"
+        >Azure Custom Vision Service</a
+      >
+      and
+      <a
+        href="https://docs.microsoft.com/en-ca/azure/cognitive-services/speech-service/quickstarts/text-to-speech?WT.mc_id=sample-neuralspeech-emwalker"
+        >Azure Neural Speech Service</a
+      >.
+
+      <p>
+        All video processing happens in your web browser.<br />Your webcam data does
+        not leave your computer.
+      </p>
+    </div>
+  </body>
+</html>
